@@ -7,7 +7,13 @@
     <title>Append Iframe Test</title>
   </head>
   <body>
-    <h1>Iframe will be loaded after <span id="second">5</span> seconds ...</h1>
+    <h1>Iframe will be loaded after <span id="second">3</span> seconds ...</h1>
+    <div style="padding: 8px; border: 1px solid lightgrey; margin: 8px 0">
+      <code><pre id="logText"></pre></code>
+    </div>
+    <script>
+      var logText = document.getElementById("logText");
+    </script>
     <script>
       var iframe = document.createElement("iframe");
       var second = document.getElementById("second");
@@ -44,7 +50,15 @@
           return;
         }
 
-        console.log("Message: %s (type: %s)", e.data.value, e.data.type);
+        logText.innerText +=
+          "[" +
+          new Date().toISOString() +
+          "]" +
+          "(type: " +
+          e.data.type +
+          ") - " +
+          e.data.value +
+          "\n";
       });
     </script>
   </body>

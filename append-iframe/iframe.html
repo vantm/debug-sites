@@ -9,17 +9,23 @@
   <body>
     <h2>IFrame content</h2>
     <script>
-      console.log(window.location.origin);
-
       var targetOrigin =
         window.location.origin.indexOf("localhost") !== -1
           ? "http://localhost:5000"
           : "https://priceless-hoover-5d65fb.netlify.app";
 
-      window.parent.postMessage(
-        { type: "message", value: "Hello from iframe" },
-        targetOrigin
-      );
+      function sendMessage() {
+        window.parent.postMessage(
+          { type: "message", value: "Hello from iframe" },
+          targetOrigin
+        );
+      }
+
+      sendMessage();
+
+      setInterval(function () {
+        sendMessage();
+      }, 3000);
     </script>
   </body>
 </html>
