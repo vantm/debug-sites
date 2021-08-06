@@ -32,5 +32,20 @@
         second.innerText = count;
       }, 1000);
     </script>
+
+    <script>
+      var targetOrigin =
+        window.location.origin.indexOf("localhost") !== -1
+          ? "http://localhost:5000"
+          : "https://priceless-hoover-5d65fb.netlify.app";
+
+      window.addEventListener("message", function (e) {
+        if (e.origin !== targetOrigin || !e.data?.type) {
+          return;
+        }
+
+        console.log("Message: %s (type: %s)", e.data.value, e.data.type);
+      });
+    </script>
   </body>
 </html>
