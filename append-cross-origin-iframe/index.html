@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Append Iframe Test</title>
+    <title>Append Cross-Origin Iframe Test</title>
     <style>
       html,
       body {
@@ -14,13 +14,21 @@
     </style>
   </head>
   <body>
-    <h1>Iframe will be loaded after <span id="second">3</span> seconds ...</h1>
+    <h1>
+      Cross-Origin Iframe will be loaded after
+      <span id="second">3</span> seconds ...
+    </h1>
     <div
       style="padding: 8px; border: 1px solid lightgrey; margin: 8px 0"
       id="logText"
     ></div>
     <script>
       var logText = document.getElementById("logText");
+
+      var targetOrigin =
+        window.location.origin.indexOf("localhost") !== -1
+          ? "http://localhost:5000"
+          : "https://priceless-hoover-5d65fb.netlify.app";
     </script>
     <script>
       var iframe = document.createElement("iframe");
@@ -35,7 +43,7 @@
       var interval;
 
       setTimeout(function () {
-        iframe.src = "iframe.html";
+        iframe.src = targetOrigin + "/cross-iframe.html";
 
         clearInterval(interval);
         second.innerText = "0";
@@ -48,11 +56,6 @@
     </script>
 
     <script>
-      var targetOrigin =
-        window.location.origin.indexOf("localhost") !== -1
-          ? "http://localhost:5000"
-          : "https://priceless-hoover-5d65fb.netlify.app";
-
       window.addEventListener("message", function (e) {
         if (e.origin !== targetOrigin || !e.data?.type) {
           return;

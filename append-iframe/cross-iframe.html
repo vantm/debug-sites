@@ -11,12 +11,12 @@
     <script>
       var targetOrigin =
         window.location.origin.indexOf("localhost") !== -1
-          ? "http://localhost:5000"
+          ? "http://localhost:5001"
           : "https://priceless-hoover-5d65fb.netlify.app";
 
       function sendMessage() {
         window.parent.postMessage(
-          { type: "message", value: "Hello from iframe" },
+          { type: "message", value: "Hello from cross-origin iframe" },
           targetOrigin
         );
       }
