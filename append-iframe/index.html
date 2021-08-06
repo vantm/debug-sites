@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Append Iframe Test</title>
+  </head>
+  <body>
+    <h1>Iframe will be loaded after <span id="second">5</span> seconds ...</h1>
+    <script>
+      var iframe = document.createElement("iframe");
+      var second = document.getElementById("second");
+
+      window.document.body.appendChild(iframe);
+
+      iframe.title = "test iframe";
+
+      var count = parseInt(second.innerText.trim()) || 5;
+
+      var interval;
+
+      setTimeout(function () {
+        iframe.src = "iframe.html";
+
+        clearInterval(interval);
+        second.innerText = "0";
+      }, count * 1000);
+
+      interval = setInterval(function () {
+        count--;
+        second.innerText = count;
+      }, 1000);
+    </script>
+  </body>
+</html>
