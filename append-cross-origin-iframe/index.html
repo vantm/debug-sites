@@ -32,6 +32,14 @@
     </script>
     <script>
       var iframe = document.createElement("iframe");
+
+      iframe.style.visibility = "hidden";
+      iframe.style.width = 0;
+      iframe.style.height = 0;
+      iframe.style.position = "absolute";
+      iframe.style.top = 0;
+      iframe.style.left = 0;
+
       var second = document.getElementById("second");
 
       window.document.body.appendChild(iframe);
