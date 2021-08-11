@@ -41,8 +41,8 @@
 
       window.addEventListener("message", function (e) {
         if (
-          e.origin !== "https://priceless-hoover-5d65fb.netlify.app" ||
-          e.origin.indexOf("localhost") < 0 ||
+          (e.origin !== "https://priceless-hoover-5d65fb.netlify.app" &&
+            e.origin.indexOf("localhost") < 0) ||
           !e.data?.type
         ) {
           return;
