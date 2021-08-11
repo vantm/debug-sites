@@ -9,15 +9,10 @@
   <body>
     <h2>IFrame content</h2>
     <script>
-      var targetOrigin =
-        window.location.origin.indexOf("localhost") !== -1
-          ? "http://localhost:5001"
-          : "https://pedantic-kalam-564893.netlify.app/";
-
       function sendMessage() {
         window.parent.postMessage(
           { type: "message", value: "Hello from cross-origin iframe" },
-          targetOrigin
+          "https://pedantic-kalam-564893.netlify.app"
         );
       }
 

@@ -11,58 +11,32 @@
         background-color: #333;
         color: #eee;
       }
+      iframe {
+        display: none;
+        width: 0;
+        height: 0;
+      }
     </style>
   </head>
   <body>
-    <h1>
-      Cross-Origin Iframe will be loaded after
-      <span id="second">3</span> seconds ...
-    </h1>
     <div
       style="padding: 8px; border: 1px solid lightgrey; margin: 8px 0"
       id="logText"
     ></div>
+    <iframe
+      id="iframe"
+      src="https://priceless-hoover-5d65fb.netlify.app/cross-iframe.html"
+    ></iframe>
     <script>
       var logText = document.getElementById("logText");
-
-      var targetOrigin =
-        window.location.origin.indexOf("localhost") !== -1
-          ? "http://localhost:5000"
-          : "https://priceless-hoover-5d65fb.netlify.app";
-    </script>
-    <script>
-      var iframe = document.createElement("iframe");
-
-      iframe.style.display = "none";
-      iframe.style.width = 0;
-      iframe.style.height = 0;
-
-      var second = document.getElementById("second");
-
-      window.document.body.appendChild(iframe);
-
-      iframe.title = "test iframe";
-
-      var count = parseInt(second.innerText.trim()) || 5;
-
-      var interval;
-
-      setTimeout(function () {
-        iframe.src = targetOrigin + "/cross-iframe.html";
-
-        clearInterval(interval);
-        second.innerText = "0";
-      }, count * 1000);
-
-      interval = setInterval(function () {
-        count--;
-        second.innerText = count;
-      }, 1000);
     </script>
 
     <script>
       window.addEventListener("message", function (e) {
-        if (e.origin !== targetOrigin || !e.data?.type) {
+        if (
+          e.origin !== "https://priceless-hoover-5d65fb.netlify.app" ||
+          !e.data?.type
+        ) {
           return;
         }
 
