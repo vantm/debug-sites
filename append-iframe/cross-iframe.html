@@ -12,7 +12,9 @@
       function sendMessage() {
         window.parent.postMessage(
           { type: "message", value: "Hello from cross-origin iframe" },
-          "https://pedantic-kalam-564893.netlify.app"
+          window.location.host.indexOf("localhost") >= 0
+            ? "http://localhost:5001"
+            : "https://pedantic-kalam-564893.netlify.app"
         );
       }
 
